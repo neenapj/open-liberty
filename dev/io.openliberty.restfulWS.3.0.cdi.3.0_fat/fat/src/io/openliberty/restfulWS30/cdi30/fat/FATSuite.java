@@ -26,6 +26,7 @@ import io.openliberty.restfulWS30.cdi30.fat.test.ApplicationSingletonsTest;
 import io.openliberty.restfulWS30.cdi30.fat.test.Basic12Test;
 import io.openliberty.restfulWS30.cdi30.fat.test.Complex12Test;
 import io.openliberty.restfulWS30.cdi30.fat.test.DisableTest;
+import io.openliberty.restfulWS30.cdi30.fat.test.DoubleInstantiationTest;
 import io.openliberty.restfulWS30.cdi30.fat.test.LifeCycle12Test;
 import io.openliberty.restfulWS30.cdi30.fat.test.LifeCycleMismatch12Test;
 
@@ -36,6 +37,7 @@ import io.openliberty.restfulWS30.cdi30.fat.test.LifeCycleMismatch12Test;
                Basic12Test.class,
                Complex12Test.class,
                DisableTest.class,
+               DoubleInstantiationTest.class,
                LifeCycle12Test.class,
                LifeCycleMismatch12Test.class
 })

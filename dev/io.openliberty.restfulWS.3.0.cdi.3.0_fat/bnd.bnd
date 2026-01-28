@@ -20,7 +20,8 @@ src: \
     test-applications/disable/src,\
     test-applications/lifecyclemethod/src,\
     test-applications/lifecyclemismatch/src,\
-    test-applications/applicationsingleton/src
+    test-applications/applicationsingleton/src,\
+    test-applications/doubleinstantiation/src
 
 fat.project: true
 

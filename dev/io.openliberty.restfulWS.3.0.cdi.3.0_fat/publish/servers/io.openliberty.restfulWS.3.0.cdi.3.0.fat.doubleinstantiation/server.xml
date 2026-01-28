@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server description="RESTful WS 3.0 with CDI 3.0 - Double Instantiation Test">
+    <featureManager>
+        <feature>restfulWS-3.0</feature>
+        <feature>cdi-3.0</feature>
+        <feature>jsonb-3.0</feature>
+    </featureManager>
+
+    <include location="../fatTestPorts.xml"/>
+
+    <javaPermission className="java.lang.RuntimePermission" name="accessDeclaredMembers"/>
+
+    <!-- Added to allow EE10 to work as-is.  In EE10 the CDI "bean-discovery-mode" was switched from
+         "all" to "annotated" which requires all CDI managed classes to contain a Bean Defining Annotation.
+         Some tests have been changed to account for this while others have had this property
+         added so both scenarios are tested. -->
+    <cdi emptyBeansXmlCDI3Compatibility="true"/>
+
+    <application location="doubleinstantiation.war" />
+
+    <logging traceSpecification="*=info:io.openliberty.restfulWS30.cdi30.fat.doubleinstantiation.*=all" />
+</server>
+
+<!-- Made with Bob -->
