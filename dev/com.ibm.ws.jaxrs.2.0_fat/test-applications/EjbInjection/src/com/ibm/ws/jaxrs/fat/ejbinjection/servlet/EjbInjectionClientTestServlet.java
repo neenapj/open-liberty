@@ -45,7 +45,7 @@ public class EjbInjectionClientTestServlet extends FATServlet {
         client.close();
     }
 
-    @Test
+   @Test
     public void testNoInterfaceInjection() {
         Response response = client.target(URI_CONTEXT_ROOT)
                         .path("nointerface/greet")
@@ -109,7 +109,7 @@ public class EjbInjectionClientTestServlet extends FATServlet {
                         .get();
         assertEquals(200, response2.getStatus());
         assertEquals("Goodbye, World!", response2.readEntity(String.class));
-    }
+    } 
 
     // ========== New Test Cases for Missing EJB Injection Scenarios ==========
 
@@ -129,7 +129,7 @@ public class EjbInjectionClientTestServlet extends FATServlet {
         assertEquals("Hello from EJB service, TestUser!", response.readEntity(String.class));
     }
 
-    /**
+     /**
      * Scenario 2: Resource class defined as an EJB via annotation (@Stateless)
      * with an injected method parameter.
      */
