@@ -1,0 +1,58 @@
+###############################################################################
+# Copyright (c) 2026 IBM Corporation and others.
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License 2.0
+# which accompanies this distribution, and is available at
+# http://www.eclipse.org/legal/epl-2.0/
+#
+# SPDX-License-Identifier: EPL-2.0
+#
+# Contributors:
+#     IBM Corporation - initial API and implementation
+###############################################################################
+
+# File permissions for reading/writing diagnostic reports
+(java.io.FilePermission "${server.output.dir}${/}logs${/}diagnostics${/}-" "read,write,delete")
+(java.io.FilePermission "${server.output.dir}${/}logs${/}diagnostics" "read,write")
+
+# File permissions for reading FFDC logs
+(java.io.FilePermission "${server.output.dir}${/}logs${/}ffdc${/}-" "read")
+(java.io.FilePermission "${server.output.dir}${/}logs${/}ffdc" "read")
+
+# File permissions for reading server logs
+(java.io.FilePermission "${server.output.dir}${/}logs${/}messages.log" "read")
+(java.io.FilePermission "${server.output.dir}${/}logs${/}trace.log" "read")
+(java.io.FilePermission "${server.output.dir}${/}logs${/}console.log" "read")
+
+# Network permissions for sending emails
+(java.net.SocketPermission "*" "connect,resolve")
+
+# Network permissions for fetching external content (GitHub, IBM Support, docs)
+(java.net.URLPermission "https://api.github.com/-" "*:*")
+(java.net.URLPermission "https://github.com/-" "*:*")
+(java.net.URLPermission "https://www.ibm.com/-" "*:*")
+(java.net.URLPermission "https://openliberty.io/-" "*:*")
+
+# Property permissions for reading system properties
+(java.util.PropertyPermission "*" "read")
+
+# Management permissions for accessing MBeans
+(javax.management.MBeanPermission "*" "registerMBean,unregisterMBean")
+(javax.management.MBeanPermission "com.ibm.ws.diagnostics.summary.*" "*")
+(javax.management.MBeanServerPermission "createMBeanServer")
+
+# Runtime permissions
+(java.lang.RuntimePermission "accessDeclaredMembers")
+(java.lang.RuntimePermission "getClassLoader")
+(java.lang.RuntimePermission "setContextClassLoader")
+(java.lang.RuntimePermission "modifyThread")
+(java.lang.RuntimePermission "modifyThreadGroup")
+
+# Reflection permissions for analyzing exceptions
+(java.lang.reflect.ReflectPermission "suppressAccessChecks")
+
+# Security permissions for accessing security context
+(java.security.SecurityPermission "getProperty.*")
+
+# Logging permissions
+(java.util.logging.LoggingPermission "control")

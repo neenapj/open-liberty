@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (c) 2026 IBM Corporation and others.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License 2.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-2.0/
+
+    SPDX-License-Identifier: EPL-2.0
+
+    Contributors:
+        IBM Corporation - initial API and implementation
+-->
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0"
+                   xmlns:ibm="http://www.ibm.com/xmlns/appservers/osgi/metatype/v1.0.0"
+                   localization="OSGI-INF/l10n/metatype">
+
+    <OCD id="com.ibm.ws.diagnostics.summary"
+         name="%diagnosticSummary"
+         description="%diagnosticSummary.desc"
+         ibm:alias="diagnosticSummary">
+
+        <!-- Core Settings -->
+        <AD id="enabled"
+            name="%enabled"
+            description="%enabled.desc"
+            type="Boolean"
+            default="true"
+            required="false"/>
+
+        <AD id="mailSessionRef"
+            name="%mailSessionRef"
+            description="%mailSessionRef.desc"
+            type="String"
+            ibm:type="pid"
+            ibm:reference="com.ibm.ws.javamail.MailSession"
+            required="false"/>
+
+        <!-- Email Recipients -->
+        <AD id="emailRecipients"
+            name="%emailRecipients"
+            description="%emailRecipients.desc"
+            type="String"
+            cardinality="2147483647"
+            required="false"
+            ibm:type="pid"
+            ibm:reference="com.ibm.ws.diagnostics.summary.emailRecipient"/>
+
+        <!-- Immediate Triggers -->
+        <AD id="immediateTriggers"
+            name="%immediateTriggers"
+            description="%immediateTriggers.desc"
+            type="String"
+            ibm:type="pid"
+            ibm:reference="com.ibm.ws.diagnostics.summary.immediateTriggers"
+            required="false"/>
+
+        <!-- Scheduled Analysis -->
+        <AD id="scheduledAnalysis"
+            name="%scheduledAnalysis"
+            description="%scheduledAnalysis.desc"
+            type="String"
+            ibm:type="pid"
+            ibm:reference="com.ibm.ws.diagnostics.summary.scheduledAnalysis"
+            required="false"/>
+
+        <!-- Manual Trigger -->
+        <AD id="manualTrigger.enabled"
+            name="%manualTrigger.enabled"
+            description="%manualTrigger.enabled.desc"
+            type="Boolean"
+            default="true"
+            required="false"/>
+
+        <!-- Report Options -->
+        <AD id="reportOptions"
+            name="%reportOptions"
+            description="%reportOptions.desc"
+            type="String"
+            ibm:type="pid"
+            ibm:reference="com.ibm.ws.diagnostics.summary.reportOptions"
+            required="false"/>
+
+        <!-- Trace Recommendations -->
+        <AD id="traceRecommendations"
+            name="%traceRecommendations"
+            description="%traceRecommendations.desc"
+            type="String"
+            ibm:type="pid"
+            ibm:reference="com.ibm.ws.diagnostics.summary.traceRecommendations"
+            required="false"/>
+
+        <!-- External Content Fetching -->
+        <AD id="externalContentFetching"
+            name="%externalContentFetching"
+            description="%externalContentFetching.desc"
+            type="String"
+            ibm:type="pid"
+            ibm:reference="com.ibm.ws.diagnostics.summary.externalContentFetching"
+            required="false"/>
+    </OCD>
+
+    <Designate pid="com.ibm.ws.diagnostics.summary">
+        <Object ocdref="com.ibm.ws.diagnostics.summary"/>
+    </Designate>
+
+    <!-- Email Recipient Configuration -->
+    <OCD id="com.ibm.ws.diagnostics.summary.emailRecipient"
+         name="%emailRecipient"
+         description="%emailRecipient.desc"
+         ibm:alias="recipient">
+
+        <AD id="email"
+            name="%email"
+            description="%email.desc"
+            type="String"
+            required="true"/>
+
+        <AD id="type"
+            name="%type"
+            description="%type.desc"
+            type="String"
+            default="to"
+            required="false">
+            <Option label="%type.to" value="to"/>
+            <Option label="%type.cc" value="cc"/>
+            <Option label="%type.bcc" value="bcc"/>
+        </AD>
+    </OCD>
+
+    <Designate factoryPid="com.ibm.ws.diagnostics.summary.emailRecipient">
+        <Object ocdref="com.ibm.ws.diagnostics.summary.emailRecipient"/>
+    </Designate>
+
+    <!-- Immediate Triggers Configuration -->
+    <OCD id="com.ibm.ws.diagnostics.summary.immediateTriggers"
+         name="%immediateTriggers"
+         description="%immediateTriggers.desc"
+         ibm:alias="immediateTriggers">
+
+        <AD id="exceptionTrigger.enabled"
+            name="%exceptionTrigger.enabled"
+            description="%exceptionTrigger.enabled.desc"
+            type="Boolean"
+            default="true"
+            required="false"/>
+
+        <AD id="exceptionTrigger.threshold"
+            name="%exceptionTrigger.threshold"
+            description="%exceptionTrigger.threshold.desc"
+            type="Integer"
+            default="5"
+            required="false"/>
+
+        <AD id="exceptionTrigger.timeWindow"
+            name="%exceptionTrigger.timeWindow"
+            description="%exceptionTrigger.timeWindow.desc"
+            type="String"
+            default="10m"
+            required="false"/>
+
+        <AD id="exceptionTrigger.severity"
+            name="%exceptionTrigger.severity"
+            description="%exceptionTrigger.severity.desc"
+            type="String"
+            cardinality="2147483647"
+            default="CRITICAL,HIGH"
+            required="false"/>
+    </OCD>
+
+    <Designate factoryPid="com.ibm.ws.diagnostics.summary.immediateTriggers">
+        <Object ocdref="com.ibm.ws.diagnostics.summary.immediateTriggers"/>
+    </Designate>
+
+    <!-- Scheduled Analysis Configuration -->
+    <OCD id="com.ibm.ws.diagnostics.summary.scheduledAnalysis"
+         name="%scheduledAnalysis"
+         description="%scheduledAnalysis.desc"
+         ibm:alias="scheduledAnalysis">
+
+        <AD id="enabled"
+            name="%scheduledAnalysis.enabled"
+            description="%scheduledAnalysis.enabled.desc"
+            type="Boolean"
+            default="false"
+            required="false"/>
+
+        <AD id="schedule"
+            name="%schedule"
+            description="%schedule.desc"
+            type="String"
+            default="0 */4 * * *"
+            required="false"/>
+
+        <AD id="timezone"
+            name="%timezone"
+            description="%timezone.desc"
+            type="String"
+            required="false"/>
+
+        <AD id="minIssuesForReport"
+            name="%minIssuesForReport"
+            description="%minIssuesForReport.desc"
+            type="Integer"
+            default="1"
+            required="false"/>
+    </OCD>
+
+    <Designate factoryPid="com.ibm.ws.diagnostics.summary.scheduledAnalysis">
+        <Object ocdref="com.ibm.ws.diagnostics.summary.scheduledAnalysis"/>
+    </Designate>
+
+    <!-- Report Options Configuration -->
+    <OCD id="com.ibm.ws.diagnostics.summary.reportOptions"
+         name="%reportOptions"
+         description="%reportOptions.desc"
+         ibm:alias="reportOptions">
+
+        <AD id="includeFullStackTraces"
+            name="%includeFullStackTraces"
+            description="%includeFullStackTraces.desc"
+            type="Boolean"
+            default="true"
+            required="false"/>
+
+        <AD id="generatePDF"
+            name="%generatePDF"
+            description="%generatePDF.desc"
+            type="Boolean"
+            default="true"
+            required="false"/>
+
+        <AD id="pdfIncludeCharts"
+            name="%pdfIncludeCharts"
+            description="%pdfIncludeCharts.desc"
+            type="Boolean"
+            default="true"
+            required="false"/>
+    </OCD>
+
+    <Designate factoryPid="com.ibm.ws.diagnostics.summary.reportOptions">
+        <Object ocdref="com.ibm.ws.diagnostics.summary.reportOptions"/>
+    </Designate>
+
+</metatype:MetaData>
+
+<!-- Made with Bob -->
