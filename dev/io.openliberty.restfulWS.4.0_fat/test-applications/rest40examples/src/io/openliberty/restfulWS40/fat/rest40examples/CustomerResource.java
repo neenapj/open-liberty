@@ -60,7 +60,7 @@ public class CustomerResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response patchCustomer(
             @PathParam("id") Long id,
-            JsonValue patchJson) {
+            JsonMergePatch mergePatch) {
 
         Customer customer = customers.get(id);
         if (customer == null) {
@@ -73,7 +73,7 @@ public class CustomerResource {
                 jsonb.toJson(customer), JsonValue.class);
 
             // Create merge patch manually from the incoming JSON
-            JsonMergePatch mergePatch = Json.createMergePatch(patchJson);
+            //JsonMergePatch mergePatch = Json.createMergePatch(patchJson);
 
             // Apply the merge patch
             JsonValue patchedJson = mergePatch.apply(customerJson);

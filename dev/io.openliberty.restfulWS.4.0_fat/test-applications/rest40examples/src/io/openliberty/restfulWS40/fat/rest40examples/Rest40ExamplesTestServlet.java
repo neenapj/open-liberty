@@ -197,20 +197,37 @@ public class Rest40ExamplesTestServlet extends FATServlet {
 
     @Test
     public void testInvalidJsonMergePatch(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        System.out.println("========================================");
+        System.out.println("=== TEST: testInvalidJsonMergePatch ===");
+        System.out.println("========================================");
+
         Client client = ClientBuilder.newClient();
         String baseUrl = getBaseUrl(request);
 
         try {
+            System.out.println("Attempting to patch non-existent customer (ID: 99999)");
+            System.out.println("This should trigger a 404 response and potentially an FFDC incident");
+
             // Try to patch a non-existent customer
             String patchJson = "{\"email\":\"test@example.com\"}";
             WebTarget patchTarget = client.target(baseUrl + "/customers/99999");
+
+            System.out.println("Sending PATCH request to: " + patchTarget.getUri());
             Response patchResp = patchTarget.request(MediaType.APPLICATION_JSON)
                 .method("PATCH", Entity.entity(patchJson, "application/merge-patch+json"));
 
-            assertEquals(404, patchResp.getStatus());
+            int status = patchResp.getStatus();
+            System.out.println("Response status: " + status);
+            assertEquals(404, status);
             patchResp.close();
+
+            System.out.println("Test completed successfully");
+        } catch (Exception e) {
+            System.out.println("Exception occurred during test: " + e.getClass().getName() + ": " + e.getMessage());
+            throw e;
         } finally {
             client.close();
+            System.out.println("========================================");
         }
     }
 
