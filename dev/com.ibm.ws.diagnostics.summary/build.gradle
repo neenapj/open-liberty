@@ -1,0 +1,50 @@
+/*******************************************************************************
+ * Copyright (c) 2026 IBM Corporation and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 2.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *******************************************************************************/
+
+configurations {
+    pdfLibs
+    chartLibs
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // PDF generation libraries
+    pdfLibs 'org.apache.pdfbox:pdfbox:2.0.29'
+    pdfLibs 'org.apache.pdfbox:fontbox:2.0.29'
+
+    // Chart generation libraries
+    chartLibs 'org.jfree:jfreechart:1.5.4'
+    chartLibs 'org.jfree:jcommon:1.0.24'
+}
+
+task copyLibs(type: Copy) {
+    from configurations.pdfLibs
+    from configurations.chartLibs
+    into 'lib'
+}
+
+// Ensure libs are copied before compilation
+compileJava.dependsOn copyLibs
+
+// Publish feature manifest to features directory
+task publishFeatureManifests(type: Copy) {
+    dependsOn jar
+    from project.file('publish/features')
+    into buildImage.file('wlp/lib/features')
+    include '*.mf'
+}
+
+assemble.dependsOn publishFeatureManifests
