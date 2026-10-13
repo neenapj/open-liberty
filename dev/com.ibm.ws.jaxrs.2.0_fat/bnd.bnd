@@ -33,6 +33,8 @@ src: \
   test-applications/helloworld/src,\
   test-applications/ibmjson4j/src,\
   test-applications/jackson/src,\
+  test-applications/jacksonJsr310/src,\
+  test-applications/jacksonJsr310Jakarta/src,\
   test-applications/jacksonJsonIgnore/src,\
   test-applications/json/src,\
   test-applications/linkheader/src,\
@@ -90,7 +92,7 @@ tested.features: \
   expressionlanguage-5.0,\
   restfulwsclient-3.1,\
   appsecurity-5.0,\
-  restfulws-3.1,\
+  restfulWS-3.1,\
   xmlbinding-4.0,\
   cdi-4.0,\
   servlet-6.0,\
@@ -127,5 +129,9 @@ tested.features: \
   io.openliberty.com.fasterxml.jackson,\
   io.openliberty.com.fasterxml.jackson.jaxrs,\
   io.openliberty.org.apache.commons.logging;version=latest,\
-  io.openliberty.org.apache.commons.codec;version=latest
+  io.openliberty.org.apache.commons.codec;version=latest,\
+  com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-base;version=2.21.5,\
+  com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-json-provider;version=2.21.5,\
+  io.openliberty.jakarta.servlet.6.0;version=latest,\
+  io.openliberty.jakarta.restfulWS.3.1;version=latest
 	

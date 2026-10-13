@@ -1,0 +1,42 @@
+<!--
+    Copyright (c) 2026 IBM Corporation and others.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License 2.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-2.0/
+
+    SPDX-License-Identifier: EPL-2.0
+
+    Contributors:
+        IBM Corporation - initial API and implementation
+ -->
+<server>
+    <featureManager>
+        <feature>componenttest-2.0</feature>
+        <feature>restfulWS-3.1</feature>
+        <feature>jsonb-3.0</feature>
+        <feature>servlet-6.0</feature>
+    </featureManager>
+
+    <!--
+        Validates that an application-packaged Jackson jakarta.ws.rs provider
+        overrides the container JSON-B/Yasson provider that is auto-installed
+        when restfulWS-3.1 and jsonb-3.0 are both active.
+
+        The WAR bundles jackson-jakarta-rs-json-provider, jackson-databind, and
+        jackson-datatype-jsr310 in WEB-INF/lib — the customer deployment model
+        for restfulWS-3.x with the Jakarta namespace.
+    -->
+    <application type="war" id="jacksonJsr310Jakarta" name="jacksonJsr310Jakarta"
+                 location="jacksonJsr310Jakarta.war">
+    </application>
+
+    <include location="../fatTestPorts.xml"/>
+    <javaPermission className="java.io.FilePermission" name="ALL FILES" actions="read"/>
+    <javaPermission className="java.lang.RuntimePermission" name="getClassLoader"/>
+    <javaPermission className="java.lang.RuntimePermission" name="accessDeclaredMembers"/>
+    <javaPermission className="java.lang.reflect.ReflectPermission" name="suppressAccessChecks"/>
+    <javaPermission className="java.util.PropertyPermission" name="*" actions="read"/>
+    <javaPermission className="java.lang.RuntimePermission" name="getProtectionDomain"/>
+    <javaPermission className="java.lang.RuntimePermission" name="modifyThread"/>
+</server>

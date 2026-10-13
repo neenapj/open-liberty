@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2024 IBM Corporation and others.
+ * Copyright (c) 2019, 2026 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -16,6 +16,8 @@ configurations {
   cxf
   jackson1x
   jackson2x
+  jacksonJakarta
+  jsr310
   jersey
   json
   httpclient
@@ -23,6 +25,10 @@ configurations {
 }
 
 configurations.jersey {
+  transitive = false
+}
+
+configurations.jsr310 {
   transitive = false
 }
 
@@ -38,6 +44,10 @@ dependencies {
     'io.openliberty.org.codehaus.jackson:jackson-xc:1.9.13.1'
   jackson2x project(':io.openliberty.com.fasterxml.jackson'),
     project(':io.openliberty.com.fasterxml.jackson.jaxrs')
+  jacksonJakarta project(':io.openliberty.com.fasterxml.jackson'),
+    'com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-base:2.21.5',
+    'com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-json-provider:2.21.5'
+  jsr310 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.2'
   jersey 'org.glassfish.hk2.external:aopalliance-repackaged:2.3.0-b10',
     'org.ow2.asm:asm-debug-all:5.2',
     'org.glassfish.hk2:hk2-api:2.3.0-b10',
@@ -85,6 +95,16 @@ task addJackson2x(type: Copy) {
   into "${buildDir}/autoFVT/appLibs/jackson2x/"
 }
 
+task addJacksonJakarta(type: Copy) {
+  from configurations.jacksonJakarta
+  into "${buildDir}/autoFVT/appLibs/jacksonJakarta/"
+}
+
+task addJsr310(type: Copy) {
+  from configurations.jsr310
+  into "${buildDir}/autoFVT/appLibs/jsr310/"
+}
+
 task addJersey(type: Copy) {
   from configurations.jersey
   into "${buildDir}/autoFVT/appLibs/jersey/"
@@ -120,6 +140,8 @@ addRequiredLibraries {
   dependsOn addCXF
   dependsOn addJackson1x
   dependsOn addJackson2x
+  dependsOn addJacksonJakarta
+  dependsOn addJsr310
   dependsOn addJersey
   dependsOn addJersey2
   dependsOn addJson

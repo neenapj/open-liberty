@@ -40,6 +40,8 @@ import componenttest.rules.repeater.RepeatTests;
                 HelloWorldTest.class,
                 IBMJSON4JTest.class,
                 JacksonJsonIgnoreTest.class,
+                JacksonJsr310JakartaTest.class,
+                JacksonJsr310Test.class,
                 JacksonPOJOTest.class,
                 JacksonPOJOwithUserJacksonLib1xTest.class,
                 JacksonPOJOwithUserJacksonLib2xTest.class,
