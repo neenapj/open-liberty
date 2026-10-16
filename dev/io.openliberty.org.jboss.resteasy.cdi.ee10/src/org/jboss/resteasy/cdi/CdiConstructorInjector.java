@@ -65,9 +65,14 @@ public class CdiConstructorInjector implements ConstructorInjector {
             }
         }
         
-        // Try interfaces first, then concrete class
-        // For EJBs with @Local interfaces not implemented by the class, the bean is a proxy
-        // that only implements the interfaces. We must resolve using interface types.
+        // Liberty Change Start (fix: try concrete class type first)
+        // Try the bean class type before interface types. When a @Stateless EJB declares
+        // @Local(SomeInterface.class) but has resource methods not on that interface,
+        // resolving via the interface type returns a Weld proxy that only implements the
+        // interface. Invoking a bean-class-only method on such a proxy fails with
+        // IllegalArgumentException in Java reflection. Resolving via the bean class type
+        // first returns a reference that IS assignable from the bean class, so all methods
+        // (whether on the interface or only on the bean class) can be invoked.
         List<Type> interfaceTypes = new ArrayList<>();
         List<Type> classTypes = new ArrayList<>();
         
@@ -79,10 +84,11 @@ public class CdiConstructorInjector implements ConstructorInjector {
             }
         }
         
-        // Try interface types first
+        // Try concrete class types first, then interfaces
         List<Type> orderedTypes = new ArrayList<>();
-        orderedTypes.addAll(interfaceTypes);
         orderedTypes.addAll(classTypes);
+        orderedTypes.addAll(interfaceTypes);
+        // Liberty Change End (fix: try concrete class type first)
         
         for (Type type : orderedTypes) {
             Set<Bean<?>> beans = manager.getBeans(type);

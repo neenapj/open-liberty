@@ -171,16 +171,7 @@ public class MethodInjectorImpl implements MethodInjector {
             if (interfaceMethod != null) {
                 invokedMethod = interfaceMethod;
             } else {
-                // Fallback
-                // invokedMethod is for when the target object might be a proxy and
-                // resteasy is getting the bean class to introspect.
-                // In other words ResourceMethod.getMethod() does not have the same declared class as the proxy:
-                // An example is a proxied Spring bean that is a resource
-                // interface ProxiedInterface { String get(); }
-                // @Path("resource") class MyResource implements ProxiedInterface {
-                //     @GET String get() {...}
-                // }
-                //
+                // Fallback: use interfaceBasedMethod (original RESTEasy behaviour for Spring proxies etc.)
                 invokedMethod = interfaceBasedMethod;
             }
             // Liberty Change End

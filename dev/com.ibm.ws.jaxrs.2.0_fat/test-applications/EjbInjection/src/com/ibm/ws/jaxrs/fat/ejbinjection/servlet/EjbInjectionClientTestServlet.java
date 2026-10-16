@@ -222,6 +222,66 @@ public class EjbInjectionClientTestServlet extends FATServlet {
     }
 
     /**
+     * No-argument method that returns a String, annotated on the bean class and
+     * declared on the @Local interface (@GET @Path @Consumes).
+     */
+    @Test
+    public void testNoArgInterfaceMethodInjection() {
+        Response response = client.target(URI_CONTEXT_ROOT)
+                        .path("noarginterfacemethod/info")
+                        .request(MediaType.TEXT_PLAIN_TYPE)
+                        .get();
+        assertEquals(200, response.getStatus());
+        assertEquals("Hello, World!", response.readEntity(String.class));
+    }
+
+    /**
+     * No-argument resource method that exists only on the bean class and is not
+     * declared on any @Local interface. Bean does NOT implement the interface.
+     */
+    @Test
+    @SkipForRepeat({SkipForRepeat.NO_MODIFICATION, "JAXRS-2.1"}) // Skip EE7 and EE8 - requires RESTEasy (EE9+) for EJB @Local interface resolution
+    public void testNoArgClassOnlyMethodInjection() {
+        Response response = client.target(URI_CONTEXT_ROOT)
+                        .path("noargclassonlymethod/info")
+                        .request(MediaType.TEXT_PLAIN_TYPE)
+                        .get();
+        assertEquals(200, response.getStatus());
+        assertEquals("Hello!", response.readEntity(String.class));
+    }
+
+    /**
+     * Mirrors the customer's WatsonV01ApiRsBean structure:
+     * - @Local interface has only the parameterised endpoint (writeMessage)
+     * - Bean does NOT implement the interface
+     * - getInfo() no-arg endpoint is NOT on the @Local interface
+     *
+     * testWatsonStyleWriteMessage should pass (parameterised method is on interface).
+     * testWatsonStyleGetInfo should fail before the fix (RESTEASY003020 reproducer).
+     */
+    @Test
+    @SkipForRepeat({SkipForRepeat.NO_MODIFICATION, "JAXRS-2.1"}) // Skip EE7 and EE8 - requires RESTEasy (EE9+) for EJB @Local interface resolution
+    public void testWatsonStyleWriteMessage() {
+        Response response = client.target(URI_CONTEXT_ROOT)
+                        .path("watsonstyle/writemessage")
+                        .request(MediaType.TEXT_PLAIN_TYPE)
+                        .post(Entity.entity("ping", MediaType.TEXT_PLAIN));
+        assertEquals(200, response.getStatus());
+        assertEquals("echo: ping", response.readEntity(String.class));
+    }
+
+    @Test
+    @SkipForRepeat({SkipForRepeat.NO_MODIFICATION, "JAXRS-2.1"}) // Skip EE7 and EE8 - requires RESTEasy (EE9+) for EJB @Local interface resolution
+    public void testWatsonStyleGetInfo() {
+        Response response = client.target(URI_CONTEXT_ROOT)
+                        .path("watsonstyle/info")
+                        .request(MediaType.TEXT_PLAIN_TYPE)
+                        .get();
+        assertEquals(200, response.getStatus());
+        assertEquals("Hello, World!", response.readEntity(String.class));
+    }
+
+    /**
      * Scenario 1: Resource class defined as an EJB via annotation (@Stateless)
      * with EJB field injection using @Inject.
      * Tests that EJBs can be injected using @Inject in CDI-enabled environments.
