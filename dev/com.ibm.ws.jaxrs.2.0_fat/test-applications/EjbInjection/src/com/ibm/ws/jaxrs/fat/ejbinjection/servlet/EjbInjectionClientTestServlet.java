@@ -282,6 +282,54 @@ public class EjbInjectionClientTestServlet extends FATServlet {
     }
 
     /**
+     * @LocalBean workaround tests — should pass on ALL EE levels (EE7/EE8 CXF and EE9/EE10/EE11 RESTEasy).
+     *
+     * Adding @LocalBean to a @Stateless @Local EJB makes the bean available as a
+     * no-interface local view. CDI/Weld then includes the bean class in its type
+     * closure, so RESTEasy can obtain a proxy typed as the bean class and invoke
+     * bean-class-only methods without RESTEASY003020.
+     */
+    @Test
+    public void testWatsonStyleLocalBeanWriteMessage() {
+        Response response = client.target(URI_CONTEXT_ROOT)
+                        .path("watsonlocalbean/writemessage")
+                        .request(MediaType.TEXT_PLAIN_TYPE)
+                        .post(Entity.entity("ping", MediaType.TEXT_PLAIN));
+        assertEquals(200, response.getStatus());
+        assertEquals("echo: ping", response.readEntity(String.class));
+    }
+
+    @Test
+    public void testWatsonStyleLocalBeanGetInfo() {
+        Response response = client.target(URI_CONTEXT_ROOT)
+                        .path("watsonlocalbean/info")
+                        .request(MediaType.TEXT_PLAIN_TYPE)
+                        .get();
+        assertEquals(200, response.getStatus());
+        assertEquals("Hello, World!", response.readEntity(String.class));
+    }
+
+    @Test
+    public void testNoArgLocalBeanVersion() {
+        Response response = client.target(URI_CONTEXT_ROOT)
+                        .path("noarglocalbean/version")
+                        .request(MediaType.TEXT_PLAIN_TYPE)
+                        .get();
+        assertEquals(200, response.getStatus());
+        assertEquals("1.0", response.readEntity(String.class));
+    }
+
+    @Test
+    public void testNoArgLocalBeanGetInfo() {
+        Response response = client.target(URI_CONTEXT_ROOT)
+                        .path("noarglocalbean/info")
+                        .request(MediaType.TEXT_PLAIN_TYPE)
+                        .get();
+        assertEquals(200, response.getStatus());
+        assertEquals("Hello!", response.readEntity(String.class));
+    }
+
+    /**
      * Scenario 1: Resource class defined as an EJB via annotation (@Stateless)
      * with EJB field injection using @Inject.
      * Tests that EJBs can be injected using @Inject in CDI-enabled environments.
