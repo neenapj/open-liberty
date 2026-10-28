@@ -19,6 +19,8 @@ import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ejb.LocalBean;
+
 
 import com.ibm.ws.jaxrs.fat.ejbinjection.interfaces.VersionEJBInterface;
 
@@ -35,6 +37,7 @@ import com.ibm.ws.jaxrs.fat.ejbinjection.interfaces.VersionEJBInterface;
  */
 @Stateless
 @Local(VersionEJBInterface.class)
+@LocalBean
 @Path("noargclassonlymethod")
 public class EjbInjectionNoArgClassOnlyMethodResource {
 

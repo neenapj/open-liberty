@@ -22,6 +22,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ejb.LocalBean;
 
 import com.ibm.ws.jaxrs.fat.ejbinjection.interfaces.WatsonStyleInterface;
 
@@ -37,6 +38,7 @@ import com.ibm.ws.jaxrs.fat.ejbinjection.interfaces.WatsonStyleInterface;
  */
 @Stateless
 @Local(WatsonStyleInterface.class)
+@LocalBean
 @Path("watsonstyle")
 public class EjbInjectionWatsonStyleResource {
 
