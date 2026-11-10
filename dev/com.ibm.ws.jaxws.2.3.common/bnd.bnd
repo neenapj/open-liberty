@@ -237,4 +237,4 @@ instrument.classesExcludes: com/ibm/ws/jaxws/internal/resources/*.class
 	../build.sharedResources/lib/junit/old/junit.jar;version=file,\
 	com.ibm.ws.junit.extensions;version=latest,\
 	com.ibm.ws.kernel.boot;version=latest,\
-	com.ibm.ws.org.apache.ws.xmlschema.core.2.0.3;version=latest
+	com.ibm.ws.org.apache.ws.xmlschema.core.2.3.3;version=latest

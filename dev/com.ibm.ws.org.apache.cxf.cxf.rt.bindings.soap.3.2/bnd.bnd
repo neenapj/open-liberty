@@ -133,7 +133,7 @@ Export-Package: \
   com.ibm.websphere.javaee.activation.1.1;version=latest, \
   com.ibm.websphere.javaee.jws.1.0;version=latest, \
   com.ibm.websphere.javaee.wsdl4j.1.2, \
-  com.ibm.ws.org.apache.ws.xmlschema.core.2.0.3, \
+  com.ibm.ws.org.apache.ws.xmlschema.core.2.3.3, \
   com.ibm.websphere.org.osgi.core, \
   com.ibm.ws.org.osgi.annotation.versioning;version=latest, \
   com.ibm.ws.logging.core

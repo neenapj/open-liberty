@@ -115,7 +115,7 @@ instrument.classesExcludes: com/ibm/ws/wssecurity/resources/*.class
 	com.ibm.ws.org.apache.wss4j.bindings;version=latest,\
 	com.ibm.ws.org.apache.wss4j.ws.security.policy.stax;version=latest,\
 	com.ibm.ws.org.apache.wss4j.ws.security.stax;version=latest,\
-	com.ibm.ws.org.apache.ws.xmlschema.core.2.0.3;version=latest,\
+	com.ibm.ws.org.apache.ws.xmlschema.core.2.3.3;version=latest,\
 	com.ibm.ws.org.apache.xml.resolver.1.2;version=latest,\
 	com.ibm.ws.org.joda.time.2.9.9;version=latest,\
 	io.openliberty.org.opensaml.opensaml.core;version=latest,\

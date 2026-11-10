@@ -43,7 +43,7 @@ IBM-API-Package:\
  com.ibm.ws.org.apache.cxf.cxf.tools.common.3.2.jakarta, \
  com.ibm.ws.org.apache.cxf.cxf.tools.validator.3.2.jakarta, \
  io.openliberty.org.apache.neethi, \
- com.ibm.ws.org.apache.ws.xmlschema.core.2.0.3, \
+ com.ibm.ws.org.apache.ws.xmlschema.core.2.3.3, \
  com.ibm.ws.org.apache.xml.resolver.1.2, \
  com.ibm.websphere.javaee.wsdl4j.1.2; location:="dev/api/spec/,lib/"; mavenCoordinates="wsdl4j:wsdl4j:1.6.3", \
  com.ibm.ws.prereq.wsdl4j.1.6.2, \

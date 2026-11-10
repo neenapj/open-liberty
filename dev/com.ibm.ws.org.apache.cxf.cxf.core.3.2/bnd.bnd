@@ -187,7 +187,7 @@ instrument.classesExcludes: \
   com.ibm.wsspi.org.osgi.service.component.annotations;version=latest, \
   com.ibm.websphere.org.osgi.service.cm;version=latest, \
   com.ibm.wsspi.org.osgi.core, \
-  com.ibm.ws.org.apache.ws.xmlschema.core.2.0.3;version=latest, \
+  com.ibm.ws.org.apache.ws.xmlschema.core.2.3.3;version=latest, \
   com.ibm.ws.jaxb.tools,\
   com.fasterxml.woodstox.woodstox-core,\
   org.codehaus.woodstox:stax2-api;version=latest

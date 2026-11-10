@@ -27,7 +27,7 @@ IBM-SPI-Package: com.ibm.wsspi.webservices.handler
   com.ibm.ws.org.apache.neethi.3.0.2, \
   com.ibm.ws.jaxrs.2.0.common, \
   com.ibm.ws.jaxrs.2.x.config, \
-  com.ibm.ws.org.apache.ws.xmlschema.core.2.0.3
+  com.ibm.ws.org.apache.ws.xmlschema.core.2.3.3
 -jars=com.ibm.ws.jaxrs.2.0.tools, \
   io.openliberty.jaxrs.2.0.wadl2java.jaxb.runtime
 -files=\

@@ -12,7 +12,7 @@ Subsystem-Name: Internal Apache CXF 3.2 Common Feature for JAX-RS and JAX-WS
  com.ibm.ws.org.apache.cxf.cxf.rt.transports.http.3.2, \
  com.ibm.ws.org.apache.cxf.cxf.rt.transports.http.hc.3.2, \
  io.openliberty.org.apache.neethi, \
- com.ibm.ws.org.apache.ws.xmlschema.core.2.0.3, \
+ com.ibm.ws.org.apache.ws.xmlschema.core.2.3.3, \
  com.ibm.ws.org.apache.xml.resolver.1.2
 kind=ga
 edition=core
